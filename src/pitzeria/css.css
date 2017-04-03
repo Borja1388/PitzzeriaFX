@@ -1,0 +1,77 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 26-mar-2017, 13:05:47
+    Author     : Borja
+*/
+
+
+#pane{
+    -fx-background-image: url(file:///C:/Users/Borja/Documents/NetBeansProjects/Pitzeria1/img/imagen20.PNG);
+}
+#Masa{
+    -fx-border-color: white;
+    -fx-border-radius: 10px;
+}
+#taman{
+    -fx-border-color: white;
+    -fx-border-radius: 10px;
+}
+#ingrediente{
+    -fx-border-color: white;
+    -fx-border-radius: 10px;
+}
+#tiket{
+    -fx-border-color: white;
+    -fx-border-radius: 10px;
+}
+#pizza{
+    -fx-border-color: white;
+    -fx-border-radius: 10px;
+}
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
+    -fx-text-fill: white;
+    
+}
+
+.list-cell:even { /* <=== changed to even */
+    -fx-background-color: white;
+    
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: #0093ff;
+    -fx-text-fill: white;
+    
+}
+.radio-button {
+    -fx-font-family: "Arial";
+    -fx-font-size: 11;
+    /*    -fx-text-fill: rgb(255, 255, 255, 0.4);*/
+    -fx-text-fill: white;
+
+    /*    -fx-effect: dropshadow(one-pass-box , rgba(0, 0, 0, 0.6), 0, 0.0 , 0 , 1 );*/
+    -fx-border-width: 0px;
+}
+.label
+{
+    -fx-text-fill:#FFFFFF;
+    -fx-font-weight: bold;
+    -fx-font-size: 15;
+    
+
+}
+#factura{
+    -fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+
+
+
+
