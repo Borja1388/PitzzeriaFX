@@ -51,7 +51,7 @@ public class FXMLDocumentController implements Initializable {
     private String tamanyo;
     Pizza p1 = new Pizza();
     Precios precios = new Precios();
-    File archivo;
+   
     @FXML
     private AnchorPane panel;
     @FXML
@@ -198,8 +198,8 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void generarFactura(MouseEvent event) throws IOException {
         DirectoryChooser f1=new DirectoryChooser();
-        archivo=f1.showDialog(new Stage());
-        p1.generarTicket(archivo.getAbsoluteFile());
+        File directorio=f1.showDialog(new Stage());
+        p1.generarTicket(directorio);
     }
 
 }

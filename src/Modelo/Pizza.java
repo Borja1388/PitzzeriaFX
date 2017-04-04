@@ -27,7 +27,7 @@ public class Pizza {
     private String ingredientes = "SIN INGREDIENTES";
     private String tamanyo = "Pequeña";
     private String masa = "Normal";
-     int contador = 0;
+    static int contador = 0;
 
     public Map<String, Double> ingredientesSeleccionado = new HashMap<>();
 
@@ -100,15 +100,16 @@ public class Pizza {
         return precioFinal;
     }
 
-    public void generarTicket(File archivo) {
+    public void generarTicket(File directorio) {
         
         double precio;
         String ingre;
         LocalDateTime fecha = LocalDateTime.now();
-        if (archivo.lastModified() != fecha.getSecond()) {
-
-            archivo = Paths.get("Factura" + contador + ".txt").toFile();
-            try (BufferedWriter out = Files.newBufferedWriter(archivo.toPath(), StandardOpenOption.CREATE)) {
+      
+          String destino =directorio.getAbsolutePath() + "\\Factura" + contador + ".txt";
+          
+            Path dir = Paths.get(destino);
+            try (BufferedWriter out = Files.newBufferedWriter(dir.toAbsolutePath(), StandardOpenOption.CREATE)) {
                 out.write("Masa:" + getMasa() + "  " + precios.buscarPrecio(getMasa()));
                 out.newLine();
                 out.write("Tipo:" + getTipo() + "  " + precios.buscarPrecio(getTipo()));
@@ -134,6 +135,6 @@ public class Pizza {
             contador++;
         }
 
-    }
+    
 
 }
