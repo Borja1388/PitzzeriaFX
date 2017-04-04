@@ -1,0 +1,15 @@
+Basica 3.0
+Cuatro Quesos 5.0
+Barbacoa 7.0
+Mexicana 8.50
+SIN INGREDIENTES 0.0
+Jamon 0.50
+Tomate 1.50
+Cebolla 2.50
+Queso 0.75
+Olivas 1.0
+Normal 9.0
+Integral 9.50
+Pequeña 0.0
+Mediana 0.15
+Grande 0.30

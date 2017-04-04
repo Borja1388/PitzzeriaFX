@@ -13,9 +13,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
+import java.util.stream.Stream;
 
 /**
  *
@@ -30,6 +34,7 @@ public class Pizza {
     static int contador = 0;
 
     public Map<String, Double> ingredientesSeleccionado = new HashMap<>();
+    public Map<String, Double> precio = new HashMap<>();
 
     Precios precios = new Precios();
 
@@ -64,6 +69,7 @@ public class Pizza {
     public void setMasa(String masa) {
         this.masa = masa;
     }
+    
 
     public double calcularPrecio() {
         double precioFinal;
@@ -101,40 +107,54 @@ public class Pizza {
     }
 
     public void generarTicket(File directorio) {
-        
+
         double precio;
         String ingre;
         LocalDateTime fecha = LocalDateTime.now();
-      
-          String destino =directorio.getAbsolutePath() + "\\Factura" + contador + ".txt";
-          
-            Path dir = Paths.get(destino);
-            try (BufferedWriter out = Files.newBufferedWriter(dir.toAbsolutePath(), StandardOpenOption.CREATE)) {
-                out.write("Masa:" + getMasa() + "  " + precios.buscarPrecio(getMasa()));
-                out.newLine();
-                out.write("Tipo:" + getTipo() + "  " + precios.buscarPrecio(getTipo()));
-                out.newLine();
-                out.write("Ingredientes:");
-                Iterator it = ingredientesSeleccionado.keySet().iterator();
-                while (it.hasNext()) {
-                    ingre = (String) it.next();
-                    precio = ingredientesSeleccionado.get(ingre);
-                    out.write(" " + ingre + "  " + precio);
 
-                }
-                out.newLine();
-                out.write("Tamaño:" + getTamanyo() + "  " + precios.buscarPrecio(getTamanyo()));
-                out.newLine();
-                out.write("PrecioTotal:" + calcularPrecio() + " ");
-                out.newLine();
-                out.write("Fecha:" + fecha.toString());
-                out.newLine();
-            } catch (IOException e) {
-                System.out.println("Error al abrir el archivo");
+        String destino = directorio.getAbsolutePath() + "\\Factura" + contador + ".txt";
+
+        Path dir = Paths.get(destino);
+        try (BufferedWriter out = Files.newBufferedWriter(dir.toAbsolutePath(), StandardOpenOption.CREATE)) {
+            out.write("Masa:" + getMasa() + "  " + precios.buscarPrecio(getMasa()));
+            out.newLine();
+            out.write("Tipo:" + getTipo() + "  " + precios.buscarPrecio(getTipo()));
+            out.newLine();
+            out.write("Ingredientes:");
+            Iterator it = ingredientesSeleccionado.keySet().iterator();
+            while (it.hasNext()) {
+                ingre = (String) it.next();
+                precio = ingredientesSeleccionado.get(ingre);
+                out.write(" " + ingre + "  " + precio);
+
             }
-            contador++;
+            out.newLine();
+            out.write("Tamaño:" + getTamanyo() + "  " + precios.buscarPrecio(getTamanyo()));
+            out.newLine();
+            out.write("PrecioTotal:" + calcularPrecio() + " ");
+            out.newLine();
+            out.write("Fecha:" + fecha.toString());
+            out.newLine();
+        } catch (IOException e) {
+            System.out.println("Error al abrir el archivo");
+        }
+        contador++;
+    }
+    public void cargarPrecios(File archivo1){
+        List<String> trozos= new ArrayList<>();
+        String destino = archivo1.getAbsolutePath() + "\\CartaPrecios.txt";
+        Path archivo = Paths.get(destino);
+        
+        
+        try (Stream<String> datos = Files.lines(archivo)) {
+            Iterator<String> it = datos.iterator();
+            while (it.hasNext()) {
+               precio.put(it.next(), Double.NaN);
+            }
+        } catch (IOException ex) {
+            System.out.println("Error en la lectura del archivo");
         }
 
-    
+    }
 
 }
