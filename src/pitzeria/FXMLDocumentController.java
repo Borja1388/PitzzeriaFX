@@ -6,14 +6,9 @@
 package pitzeria;
 
 import Modelo.Pizza;
-import Modelo.Precios;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -50,7 +45,7 @@ public class FXMLDocumentController implements Initializable {
     private String tipopizza;
     private String tamanyo;
     Pizza p1 = new Pizza();
-    Precios precios = new Precios();
+   
    
     @FXML
     private AnchorPane panel;
@@ -98,46 +93,29 @@ public class FXMLDocumentController implements Initializable {
     private Pane pane;
     @FXML
     private Button factura;
+    @FXML
+    private Button cargar;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        combo.setDisable(true);
+        normal.setDisable(true);
+        integral.setDisable(true);
+        lista.setDisable(true);
+        tamano.setDisable(true);
+        factura.setDisable(true);
         combo.setItems(tipoPizza);
-        combo.setValue("Basica");
-        Ptipo.setText(precios.buscarPrecio("Basica") + "");
-        Ptipo.setText(precios.precio.get(p1.getTipo()) + "");
-        tamano.setValue("Pequeña");
-        pTama.setText(precios.precio.get(p1.getTamanyo()) + "");
-        normal.setSelected(true);
-        pMasa.setText(precios.precio.get(p1.getMasa()) + "");
-        lista.getSelectionModel().select("SIN INGREDIENTES");
-        pIngredientes.setText(precios.precio.get(p1.getIngredientes()) + "");
-        this.precioTotal.setText(p1.calcularPrecio() + "");
+        combo.setValue("Elige Tipo");
         lista.setItems(ingredientesExtra);
         tamano.setItems(tamaPizza);
+        tamano.setValue("Elige Tamaño");
         lista.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-//        tipos.put("Basica", 3.0);
-//        tipos.put("Cuatro Quesos", 5.0);
-//        tipos.put("Barbacoa", 7.0);
-//        tipos.put("Mexicana", 8.50);
-//        ingredientes.put("SIN INGREDIENTES", 0.0);
-//        ingredientes.put("Jamon", 0.50);
-//        ingredientes.put("Tomate", 1.50);
-//        ingredientes.put("Cebolla", 2.50);
-//        ingredientes.put("Queso", 0.75);
-//        ingredientes.put("Olivas", 1.0);
-//        masas.put("Normal", 9.0);
-//        masas.put("Integral", 9.50);
-//        tama.put("Pequeña",0.0);
-//        tama.put("Mediana",0.15);
-//        tama.put("Grande",0.30);
     }
 
     @FXML
     private void clicarCombo(ActionEvent event) {
         String tipoPizza1 = combo.getValue();
-        double tipoPizza2 = precios.buscarPrecio(tipoPizza1);
+        double tipoPizza2 = p1.buscarPrecio(tipoPizza1);
         p1.setTipo(tipoPizza1);
         Ptipo.setText(tipoPizza2 + "");
         l2.setText(tipoPizza1);
@@ -154,8 +132,8 @@ public class FXMLDocumentController implements Initializable {
         for (int i = 0; i < tipoIngredientes.size(); i++) {
             texto1 = tipoIngredientes.get(i);
             texto += tipoIngredientes.get(i) + ",";
-            ingre = ingre + precios.buscarPrecio(tipoIngredientes.get(i));
-            p1.ingredientesSeleccionado.put(texto1, precios.buscarPrecio(texto1));
+            ingre = ingre + p1.buscarPrecio(tipoIngredientes.get(i));
+            p1.ingredientesSeleccionado.put(texto1, p1.buscarPrecio(texto1));
 
         }
 
@@ -170,14 +148,14 @@ public class FXMLDocumentController implements Initializable {
 
         if (normal.isSelected()) {
             p1.setMasa("Normal");
-            double masa = precios.buscarPrecio("Normal");
+            double masa = p1.buscarPrecio("Normal");
             pMasa.setText(masa + " ");
             l1.setText("Normal");
 
         }
         if (integral.isSelected()) {
             p1.setMasa("Integral");
-            double masa = precios.buscarPrecio("Integral");
+            double masa = p1.buscarPrecio("Integral");
             pMasa.setText(masa + " ");
             l1.setText("Integral");
         }
@@ -188,7 +166,7 @@ public class FXMLDocumentController implements Initializable {
     private void clicarCombo2(ActionEvent event) {
 
         String ta = tamano.getValue();
-        double ta1 = precios.buscarPrecio(ta);
+        double ta1 = p1.buscarPrecio(ta);
         p1.setTamanyo(ta);
         pTama.setText(ta1 + " ");
         l4.setText(ta);
@@ -200,6 +178,19 @@ public class FXMLDocumentController implements Initializable {
         DirectoryChooser f1=new DirectoryChooser();
         File directorio=f1.showDialog(new Stage());
         p1.generarTicket(directorio);
+    }
+
+    @FXML
+    private void clicarCargar(MouseEvent event) {
+        FileChooser fc = new FileChooser();
+        File archivo=fc.showOpenDialog(new Stage());
+        p1.cargarPrecios(archivo);
+        combo.setDisable(false);
+        normal.setDisable(false);
+        integral.setDisable(false);
+        lista.setDisable(false);
+        tamano.setDisable(false);
+        factura.setDisable(false);
     }
 
 }

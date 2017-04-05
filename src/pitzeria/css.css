@@ -10,7 +10,7 @@ and open the template in the editor.
 
 
 #pane{
-    -fx-background-image: url(file:///C:/Users/admin/Documents/NetBeansProjects/pizzeria2/img/imagen20.PNG);
+    -fx-background-image: url(file:///C:/Users/Borja/Documents/NetBeansProjects/Pitzeria2/img/imagen20.PNG);
 }
 #Masa{
     -fx-border-color: white;
@@ -66,6 +66,12 @@ and open the template in the editor.
 
 }
 #factura{
+    -fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+#cargar{
     -fx-background-color: linear-gradient(#ff5400, #be1d00);
     -fx-background-radius: 30;
     -fx-background-insets: 0;

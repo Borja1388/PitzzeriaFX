@@ -36,6 +36,7 @@
             <Label layoutX="417.0" layoutY="4.0" text="Ingredientes Extra" />
             <Label layoutX="62.0" layoutY="284.0" text="Precio" />
             <Button fx:id="factura" layoutX="646.0" layoutY="282.0" mnemonicParsing="false" onMouseClicked="#generarFactura" prefHeight="25.0" prefWidth="116.0" text="Generar Ticket" />
+            <Button fx:id="cargar" layoutX="21.0" layoutY="201.0" mnemonicParsing="false" onMouseClicked="#clicarCargar" text="CargarPrecios" />
          </children></Pane>
       <AnchorPane fx:id="ingrediente" layoutX="402.0" layoutY="38.0" prefHeight="163.0" prefWidth="200.0">
          <children>

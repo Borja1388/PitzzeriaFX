@@ -27,16 +27,16 @@ import java.util.stream.Stream;
  */
 public class Pizza {
 
-    private String tipo = "Basica";
-    private String ingredientes = "SIN INGREDIENTES";
-    private String tamanyo = "Pequeña";
-    private String masa = "Normal";
+    private String tipo;
+    private String ingredientes;
+    private String tamanyo;
+    private String masa;
     static int contador = 0;
 
     public Map<String, Double> ingredientesSeleccionado = new HashMap<>();
-    public Map<String, Double> precio = new HashMap<>();
+    public Map<String, Double> preciosCarta = new HashMap<>();
 
-    Precios precios = new Precios();
+    
 
     public String getTipo() {
         return tipo;
@@ -69,7 +69,6 @@ public class Pizza {
     public void setMasa(String masa) {
         this.masa = masa;
     }
-    
 
     public double calcularPrecio() {
         double precioFinal;
@@ -77,18 +76,18 @@ public class Pizza {
         double iPrecio = 0.0;
         boolean encontrado = false;
         double tPrecio, mPrecio, taPrecio;
-        if (precios.precio.get(this.getTipo()) != null) {
-            tPrecio = precios.buscarPrecio(getTipo());
+        if (!this.getTipo().equals("")) {
+            tPrecio = this.buscarPrecio(getTipo());
         } else {
             tPrecio = 0.0;
         }
-        if (precios.precio.get(this.getMasa()) != null) {
-            mPrecio = precios.buscarPrecio(getMasa());
+        if (!this.getMasa().equals("")) {
+            mPrecio = this.buscarPrecio(getMasa());
         } else {
             mPrecio = 0.0;
         }
-        if (precios.precio.get(this.getTamanyo()) != null) {
-            taPrecio = precios.buscarPrecio(getTamanyo());
+        if (!this.getTamanyo().equals("")) {
+            taPrecio = this.buscarPrecio(getTamanyo());
         } else {
             taPrecio = 0.0;
         }
@@ -116,9 +115,9 @@ public class Pizza {
 
         Path dir = Paths.get(destino);
         try (BufferedWriter out = Files.newBufferedWriter(dir.toAbsolutePath(), StandardOpenOption.CREATE)) {
-            out.write("Masa:" + getMasa() + "  " + precios.buscarPrecio(getMasa()));
+            out.write("Masa:" + getMasa() + "  " + this.buscarPrecio(getMasa()));
             out.newLine();
-            out.write("Tipo:" + getTipo() + "  " + precios.buscarPrecio(getTipo()));
+            out.write("Tipo:" + getTipo() + "  " + this.buscarPrecio(getTipo()));
             out.newLine();
             out.write("Ingredientes:");
             Iterator it = ingredientesSeleccionado.keySet().iterator();
@@ -129,7 +128,7 @@ public class Pizza {
 
             }
             out.newLine();
-            out.write("Tamaño:" + getTamanyo() + "  " + precios.buscarPrecio(getTamanyo()));
+            out.write("Tamaño:" + getTamanyo() + "  " + this.buscarPrecio(getTamanyo()));
             out.newLine();
             out.write("PrecioTotal:" + calcularPrecio() + " ");
             out.newLine();
@@ -140,20 +139,59 @@ public class Pizza {
         }
         contador++;
     }
-    public void cargarPrecios(File archivo1){
-        List<String> trozos= new ArrayList<>();
-        String destino = archivo1.getAbsolutePath() + "\\CartaPrecios.txt";
+    public double buscarPrecio(String ingrediente){
+       
+       return preciosCarta.get(ingrediente);
+    }
+
+    public void cargarPrecios(File archivo1) {
+        List<String> trozos = new ArrayList<>();
+        List<String> nombres = new ArrayList<>();
+        List<Double> valores = new ArrayList<>();
+        List<String> resultadoLeer = new ArrayList<>();
+        
+        String destino = archivo1.getAbsolutePath();
         Path archivo = Paths.get(destino);
-        
-        
+
         try (Stream<String> datos = Files.lines(archivo)) {
             Iterator<String> it = datos.iterator();
             while (it.hasNext()) {
-               precio.put(it.next(), Double.NaN);
+                resultadoLeer.add(it.next());
+                
+            }
+            
+            for (int i = 0; i < resultadoLeer.size(); i++) {
+                StringTokenizer t1 = new StringTokenizer(resultadoLeer.get(i), ":");
+                while (t1.hasMoreTokens()) {
+                    trozos.add(t1.nextToken());
+                    
+                }
+            }
+            
+            for (int i = 0; i < trozos.size(); i++) {
+
+                if (i % 2 != 0) {
+                     
+                    valores.add(Double.parseDouble(trozos.get(i)));
+                }
+            }
+            
+            for (int i = 0; i < trozos.size(); i++) {
+                if (i % 2 == 0) {
+                    nombres.add(trozos.get(i));
+                }
+            }
+            
+            for (int i = 0; i < nombres.size(); i++) {
+                for (int j = 0; j < valores.size(); j++) {
+                    
+                    preciosCarta.put(nombres.get(i),valores.get(i));
+                }
             }
         } catch (IOException ex) {
             System.out.println("Error en la lectura del archivo");
         }
+        System.out.println(preciosCarta);
 
     }
 

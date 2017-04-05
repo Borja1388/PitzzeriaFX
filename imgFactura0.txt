@@ -1,6 +1,0 @@
-Masa:Normal  9.0
-Tipo:Basica  3.0
-Ingredientes:
-Tamaño:Pequeña  0.0
-PrecioTotal:12.0 
-Fecha:2017-04-04T09:43:25.589
