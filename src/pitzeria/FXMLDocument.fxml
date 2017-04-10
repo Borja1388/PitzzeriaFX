@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -45,20 +46,59 @@
       </AnchorPane>
       <AnchorPane fx:id="tiket" layoutX="35.0" layoutY="321.0" prefHeight="200.0" prefWidth="706.0">
          <children>
-            <Label layoutX="22.0" layoutY="26.0" text="MASA" />
-            <Label layoutX="22.0" layoutY="53.0" text="TIPO PIZZA" />
-            <Label layoutX="22.0" layoutY="83.0" text="INGREDIENTES" />
-            <Label layoutX="22.0" layoutY="110.0" text="TAMAÑO" />
-            <Label layoutX="22.0" layoutY="158.0" text="TOTAL" />
-            <Label fx:id="pMasa" layoutX="630.0" layoutY="26.0" text="0" />
-            <Label fx:id="Ptipo" layoutX="630.0" layoutY="53.0" text="0" />
-            <Label fx:id="pIngredientes" layoutX="630.0" layoutY="83.0" text="0" />
-            <Label fx:id="pTama" layoutX="630.0" layoutY="110.0" text="0" />
+            <Label layoutX="22.0" layoutY="26.0" text="MASA" textFill="#fff7f7">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label fx:id="texto" layoutX="22.0" layoutY="53.0" text="TIPO PIZZA" textFill="#fff7f7">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label fx:id="texto" layoutX="22.0" layoutY="83.0" text="INGREDIENTES" textFill="#fff7f7">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label layoutX="22.0" layoutY="110.0" text="TAMAÑO" textFill="#fff7f7">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label layoutX="22.0" layoutY="158.0" text="TOTAL" textFill="#fff7f7">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label fx:id="pMasa" layoutX="630.0" layoutY="26.0" text="0" textFill="#fff7f7">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label fx:id="Ptipo" layoutX="630.0" layoutY="53.0" text="0" textFill="#fff7f7">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label fx:id="pIngredientes" layoutX="630.0" layoutY="83.0" text="0" textFill="#fff7f7">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label fx:id="pTama" layoutX="630.0" layoutY="110.0" text="0" textFill="#fff7f7">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
             <TextField fx:id="precioTotal" layoutX="587.0" layoutY="154.0" prefHeight="25.0" prefWidth="96.0" promptText="0" />
-            <Label fx:id="l1" layoutX="218.0" layoutY="26.0" />
-            <Label fx:id="l2" layoutX="218.0" layoutY="53.0" />
-            <Label fx:id="l3" layoutX="218.0" layoutY="83.0" />
-            <Label fx:id="l4" layoutX="218.0" layoutY="110.0" />
+            <Label fx:id="l1" layoutX="218.0" layoutY="26.0" textFill="#fff7f7">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label fx:id="l2" layoutX="218.0" layoutY="53.0" textFill="#fff7f7">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label fx:id="l3" layoutX="218.0" layoutY="83.0" textFill="#fff7f7">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label fx:id="l4" layoutX="218.0" layoutY="110.0" textFill="#fff7f7">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
          </children></AnchorPane>
    </children>
 </AnchorPane>

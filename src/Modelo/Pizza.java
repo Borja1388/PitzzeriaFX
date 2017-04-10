@@ -18,8 +18,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.StringTokenizer;
 import java.util.stream.Stream;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -35,8 +40,6 @@ public class Pizza {
 
     public Map<String, Double> ingredientesSeleccionado = new HashMap<>();
     public Map<String, Double> preciosCarta = new HashMap<>();
-
-    
 
     public String getTipo() {
         return tipo;
@@ -76,12 +79,12 @@ public class Pizza {
         double iPrecio = 0.0;
         boolean encontrado = false;
         double tPrecio, mPrecio, taPrecio;
-        if (this.getTipo()!=null) {
+        if (this.getTipo() != null) {
             tPrecio = this.buscarPrecio(getTipo());
         } else {
             tPrecio = 0.0;
         }
-        if (this.getMasa()!=null) {
+        if (this.getMasa() != null) {
             mPrecio = this.buscarPrecio(getMasa());
         } else {
             mPrecio = 0.0;
@@ -135,61 +138,58 @@ public class Pizza {
             out.write("PrecioTotal:" + calcularPrecio());
             out.newLine();
             out.write("Fecha:" + fecha.toString());
-        } catch (IOException e) {
-            System.out.println("Error al abrir el archivo");
+
+            Alert dialogoAlerta = new Alert(AlertType.INFORMATION);
+            dialogoAlerta.setTitle("PIZZA PLANET");
+            dialogoAlerta.setHeaderText("Ticket generado con exito");
+            Optional<ButtonType> result = dialogoAlerta.showAndWait();
+        } catch (Exception e) {
+            Alert dialogoAlerta = new Alert(AlertType.INFORMATION);
+            dialogoAlerta.setTitle("PIZZA PLANET");
+            dialogoAlerta.setHeaderText("Error al generar el ticket");
+            Optional<ButtonType> result = dialogoAlerta.showAndWait();
         }
         contador++;
     }
-    public double buscarPrecio(String ingrediente){
-       
-       return preciosCarta.get(ingrediente);
+
+    public double buscarPrecio(String ingrediente) {
+
+        return preciosCarta.get(ingrediente);
     }
 
     public void cargarPrecios(File archivo1) {
-        List<String> trozos = new ArrayList<>();
-        List<String> nombres = new ArrayList<>();
-        List<Double> valores = new ArrayList<>();
-        List<String> resultadoLeer = new ArrayList<>();
-        
+        String leido, categoria, cantidad;
+        double precio;
         String destino = archivo1.getAbsolutePath();
         Path archivo = Paths.get(destino);
 
         try (Stream<String> datos = Files.lines(archivo)) {
             Iterator<String> it = datos.iterator();
             while (it.hasNext()) {
-                resultadoLeer.add(it.next());
-                
-            }
-            for (int i = 0; i < resultadoLeer.size(); i++) {
-                StringTokenizer t1 = new StringTokenizer(resultadoLeer.get(i), ":");
-                while (t1.hasMoreTokens()) {
-                    trozos.add(t1.nextToken());
-                    
-                }
-            }
-            for (int i = 0; i < trozos.size(); i++) {
+                leido = it.next();
 
-                if (i % 2 != 0) {
-                     
-                    valores.add(Double.parseDouble(trozos.get(i)));
-                }
+                StringTokenizer t1 = new StringTokenizer(leido, ":");
+
+                categoria = t1.nextToken();
+                cantidad = t1.nextToken();
+                precio = Double.parseDouble(cantidad);
+
+                preciosCarta.put(categoria, precio);
             }
-            for (int i = 0; i < trozos.size(); i++) {
-                if (i % 2 == 0) {
-                    nombres.add(trozos.get(i));
-                }
-            }
-            
-            for (int i = 0; i < nombres.size(); i++) {
-                for (int j = 0; j < valores.size(); j++) {
-                    
-                    preciosCarta.put(nombres.get(i),valores.get(i));
-                }
-            }
-        } catch (IOException ex) {
-            System.out.println("Error en la lectura del archivo");
+
+            Alert dialogoAlerta = new Alert(AlertType.INFORMATION);
+            dialogoAlerta.setTitle("PIZZA PLANET");
+            dialogoAlerta.setHeaderText("Los precios se han cargado con exito");
+
+            Optional<ButtonType> result = dialogoAlerta.showAndWait();
+
+        } catch (Exception e) {
+            Alert dialogoAlerta = new Alert(AlertType.INFORMATION);
+            dialogoAlerta.setTitle("PIZZA PLANET");
+            dialogoAlerta.setHeaderText("Error al cargar los precios");
+
+            Optional<ButtonType> result = dialogoAlerta.showAndWait();
         }
-        System.out.println(preciosCarta);
 
     }
 

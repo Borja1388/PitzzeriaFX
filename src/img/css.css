@@ -27,6 +27,8 @@ and open the template in the editor.
 #tiket{
     -fx-border-color: white;
     -fx-border-radius: 10px;
+    
+    
 }
 #pizza{
     -fx-border-color: white;
