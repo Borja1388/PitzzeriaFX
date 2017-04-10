@@ -76,17 +76,17 @@ public class Pizza {
         double iPrecio = 0.0;
         boolean encontrado = false;
         double tPrecio, mPrecio, taPrecio;
-        if (!this.getTipo().equals("")) {
+        if (this.getTipo()!=null) {
             tPrecio = this.buscarPrecio(getTipo());
         } else {
             tPrecio = 0.0;
         }
-        if (!this.getMasa().equals("")) {
+        if (this.getMasa()!=null) {
             mPrecio = this.buscarPrecio(getMasa());
         } else {
             mPrecio = 0.0;
         }
-        if (!this.getTamanyo().equals("")) {
+        if (this.getTamanyo() != null) {
             taPrecio = this.buscarPrecio(getTamanyo());
         } else {
             taPrecio = 0.0;
@@ -115,6 +115,8 @@ public class Pizza {
 
         Path dir = Paths.get(destino);
         try (BufferedWriter out = Files.newBufferedWriter(dir.toAbsolutePath(), StandardOpenOption.CREATE)) {
+            out.write("|" + "TICKET" + "|");
+            out.newLine();
             out.write("Masa:" + getMasa() + "  " + this.buscarPrecio(getMasa()));
             out.newLine();
             out.write("Tipo:" + getTipo() + "  " + this.buscarPrecio(getTipo()));
@@ -130,10 +132,9 @@ public class Pizza {
             out.newLine();
             out.write("Tamaño:" + getTamanyo() + "  " + this.buscarPrecio(getTamanyo()));
             out.newLine();
-            out.write("PrecioTotal:" + calcularPrecio() + " ");
+            out.write("PrecioTotal:" + calcularPrecio());
             out.newLine();
             out.write("Fecha:" + fecha.toString());
-            out.newLine();
         } catch (IOException e) {
             System.out.println("Error al abrir el archivo");
         }
@@ -159,7 +160,6 @@ public class Pizza {
                 resultadoLeer.add(it.next());
                 
             }
-            
             for (int i = 0; i < resultadoLeer.size(); i++) {
                 StringTokenizer t1 = new StringTokenizer(resultadoLeer.get(i), ":");
                 while (t1.hasMoreTokens()) {
@@ -167,7 +167,6 @@ public class Pizza {
                     
                 }
             }
-            
             for (int i = 0; i < trozos.size(); i++) {
 
                 if (i % 2 != 0) {
@@ -175,7 +174,6 @@ public class Pizza {
                     valores.add(Double.parseDouble(trozos.get(i)));
                 }
             }
-            
             for (int i = 0; i < trozos.size(); i++) {
                 if (i % 2 == 0) {
                     nombres.add(trozos.get(i));

@@ -177,14 +177,20 @@ public class FXMLDocumentController implements Initializable {
     private void generarFactura(MouseEvent event) throws IOException {
         DirectoryChooser f1=new DirectoryChooser();
         File directorio=f1.showDialog(new Stage());
-        p1.generarTicket(directorio);
+        if(directorio!=null){
+          p1.generarTicket(directorio);  
+        }
+        
     }
 
     @FXML
     private void clicarCargar(MouseEvent event) {
         FileChooser fc = new FileChooser();
         File archivo=fc.showOpenDialog(new Stage());
-        p1.cargarPrecios(archivo);
+        if(archivo!=null){
+          p1.cargarPrecios(archivo);  
+        }
+        
         combo.setDisable(false);
         normal.setDisable(false);
         integral.setDisable(false);

@@ -24,7 +24,7 @@ public class Pitzeria extends Application {
         
         Scene scene = new Scene(root);
         stage.setTitle("Vendiendo Pizza");
-        stage.getIcons().add(new Image("file:///C:/Users/Borja/Documents/NetBeansProjects/Pitzeria1/img/imagen4.jpg") {}); //ICONO DE LA APLICACION
+        stage.getIcons().add(new Image("/img/imagen4.jpg") {}); //ICONO DE LA APLICACION
         stage.setScene(scene);
         stage.show();
     }

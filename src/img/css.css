@@ -10,7 +10,7 @@ and open the template in the editor.
 
 
 #pane{
-    -fx-background-image: url(file:///C:/Users/Borja/Documents/NetBeansProjects/Pitzeria2/img/imagen20.PNG);
+    -fx-background-image: url("\imagen20.PNG");
 }
 #Masa{
     -fx-border-color: white;
