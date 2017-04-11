@@ -26,9 +26,7 @@ and open the template in the editor.
 }
 #tiket{
     -fx-border-color: white;
-    -fx-border-radius: 10px;
-    
-    
+    -fx-border-radius: 10px;  
 }
 #pizza{
     -fx-border-color: white;
@@ -53,10 +51,10 @@ and open the template in the editor.
 .radio-button {
     -fx-font-family: "Arial";
     -fx-font-size: 11;
-    /*    -fx-text-fill: rgb(255, 255, 255, 0.4);*/
+        -fx-text-fill: rgb(255, 255, 255, 0.4);
     -fx-text-fill: white;
 
-    /*    -fx-effect: dropshadow(one-pass-box , rgba(0, 0, 0, 0.6), 0, 0.0 , 0 , 1 );*/
+        -fx-effect: dropshadow(one-pass-box , rgba(0, 0, 0, 0.6), 0, 0.0 , 0 , 1 );
     -fx-border-width: 0px;
 }
 .label
@@ -78,6 +76,7 @@ and open the template in the editor.
     -fx-background-radius: 30;
     -fx-background-insets: 0;
     -fx-text-fill: white;
+    
 }
 
 

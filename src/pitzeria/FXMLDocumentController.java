@@ -98,6 +98,7 @@ public class FXMLDocumentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        tiket.setStyle("-fx-border-color: white;");
         combo.setDisable(true);
         normal.setDisable(true);
         integral.setDisable(true);
